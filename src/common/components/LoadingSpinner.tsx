@@ -4,7 +4,7 @@ import { PropagateLoader } from "react-spinners";
 const LoadingSpinner = () => {
   return (
     <div style={styles.container}>
-      <PropagateLoader color="#1DB954" size={15} speedMultiplier={1} />
+      <PropagateLoader color="#F43F5E" size={15} speedMultiplier={1} />
     </div>
   );
 };
