@@ -14,7 +14,7 @@ const theme = createTheme({
 
     background: {
       default: "#05070A", // 최상위 배경
-      paper: "#0D1117", // 카드 / 패널
+      paper: "#14181f", // 카드 / 패널
     },
 
     text: {
