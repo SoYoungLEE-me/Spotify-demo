@@ -1,7 +1,9 @@
 import { Typography } from "@mui/material";
-import React from "react";
+import useGetNewReleases from "../../../hooks/useGetNewReleases";
 
 const NewReleases = () => {
+  const { data, error, isLoading } = useGetNewReleases();
+  console.log("ddd", data);
   return (
     <div>
       <Typography variant="h2" paddingTop="10px">
