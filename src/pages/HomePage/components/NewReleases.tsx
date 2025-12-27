@@ -17,7 +17,6 @@ const NewReleases = () => {
 
   const albums = data?.albums.items ?? [];
 
-  console.log("ddd", data);
   return (
     <div>
       <Typography variant="h2" paddingTop="10px" marginBottom="20px">

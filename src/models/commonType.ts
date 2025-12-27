@@ -1,5 +1,11 @@
 export interface ExternalUrls {
-  spotify: string;
+  spotify?: string;
+}
+
+export interface External_ids {
+  isrc?: string;
+  ean?: string;
+  upc?: string;
 }
 
 export interface Image {
@@ -10,4 +16,18 @@ export interface Image {
 
 export interface Restriction {
   reason?: string;
+}
+
+export interface Copyright {
+  text?: string;
+  type?: string;
+}
+
+export interface Owner {
+  external_urls?: ExternalUrls;
+  href?: string;
+  id?: string;
+  type?: string;
+  uri?: string;
+  display_name?: string | null;
 }

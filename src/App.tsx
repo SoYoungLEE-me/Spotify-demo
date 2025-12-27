@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Suspense } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router";
@@ -16,6 +16,8 @@ const PlayListPage = React.lazy(
   () => import("./pages/PlayListPage/PlayListPage")
 );
 
+import useExchangeToken from "./hooks/useExchangeToken";
+
 //lazy-loading
 // 일반적으로 모든 코드를 한 번에 로드하지 않고,
 // 사용자가 필요한 시점에 해당 코드만 "지연해서(lazy) 로드" 하는 것
@@ -28,12 +30,24 @@ const PlayListPage = React.lazy(
 //5.모바일 버전(PlayListPage) /playlist
 
 function App() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get("code");
+  const codeVerifier = localStorage.getItem("code_verifier");
+  const { mutate: exchangeToken } = useExchangeToken();
+
+  useEffect(() => {
+    if (code && codeVerifier) {
+      exchangeToken({ code, codeVerifier });
+    }
+  }, [code, codeVerifier, exchangeToken]);
+
   return (
     <div>
       <Suspense fallback={<LoadingSpinner />}>
         <Routes>
           <Route element={<AppLayout />}>
             <Route path="/" element={<HomePage />} />
+            <Route path="/callback" element={<HomePage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/search/:keyword" element={<SearchResultPage />} />
             <Route path="/playlist/:id" element={<PlayListDetailPage />} />

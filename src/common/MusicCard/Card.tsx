@@ -19,11 +19,12 @@ const Card = ({ image, name, artistName }: CardProps) => {
     <MuiCard
       sx={{
         position: "relative",
+        p: 1.5,
         backgroundColor: "background.paper",
         cursor: "pointer",
         transition: "background-color 0.2s ease",
         "&:hover": {
-          backgroundColor: "rgba(255,255,255,0.04)",
+          backgroundColor: "rgba(255,255,255,0.09)",
           ".play-button": {
             opacity: 1,
             transform: "translateY(0)",
