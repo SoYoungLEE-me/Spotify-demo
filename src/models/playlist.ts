@@ -1,6 +1,7 @@
 import type { ExternalUrls, Image, Owner } from "./commonType";
-import type { TrackObject, Tracks } from "./track";
+import type { TrackObject } from "./track";
 import type { EpisodeObject } from "./show";
+import type { ApiResponse } from "./apiResponse";
 
 export type PlayableItem = TrackObject | EpisodeObject;
 
@@ -11,19 +12,10 @@ export interface PlaylistTrackObject {
   track: PlayableItem;
 }
 
-export interface Playlists {
-  href: string;
-  limit: number;
-  next: string | null;
-  offset: number;
-  previous?: string | null;
-  total: number;
-  items: SimplifiedPlaylistObject[];
-}
-
+export type Playlists = ApiResponse<SimplifiedPlaylistObject>;
 export interface SimplifiedPlaylistObject {
   collaborative?: boolean;
-  description?: string | null;
+  description?: string;
   external_urls?: ExternalUrls;
   href?: string;
   id?: string;
@@ -32,7 +24,15 @@ export interface SimplifiedPlaylistObject {
   owner?: Owner;
   public?: boolean;
   snapshot_id?: string;
-  tracks?: Tracks;
+  tracks?: {
+    href?: string;
+    total?: number;
+  };
   type?: string;
   uri?: string;
+}
+
+export interface GetCurrentUserPlaylistsRequest {
+  limit?: number;
+  offset?: number;
 }

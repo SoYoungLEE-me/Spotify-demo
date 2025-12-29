@@ -1,7 +1,11 @@
 import axios from "axios";
 import { SPOTIFY_BASE_URL } from "../configs/commonConfig";
+import { handleAxiosError } from "./handleAxiosError";
 
-export const spotifyUserGet = async <T>(endpoint: string): Promise<T> => {
+export const spotifyUserGet = async <T>(
+  endpoint: string,
+  params?: Record<string, string | number | undefined>
+): Promise<T> => {
   const accessToken = localStorage.getItem("access_token");
 
   if (!accessToken) {
@@ -13,16 +17,11 @@ export const spotifyUserGet = async <T>(endpoint: string): Promise<T> => {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
+      params,
     });
+
     return response.data;
   } catch (error) {
     throw handleAxiosError(error, "Spotify user API request failed");
   }
-};
-
-const handleAxiosError = (error: unknown, defaultMessage: string) => {
-  if (axios.isAxiosError(error)) {
-    return new Error(error.response?.data?.error?.message ?? defaultMessage);
-  }
-  return new Error(defaultMessage);
 };

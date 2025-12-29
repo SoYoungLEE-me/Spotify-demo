@@ -1,5 +1,6 @@
 import axios from "axios";
 import { SPOTIFY_BASE_URL } from "../configs/commonConfig";
+import { handleAxiosError } from "./handleAxiosError";
 
 export const spotifyGet = async <T>(
   endpoint: string,
@@ -15,13 +16,4 @@ export const spotifyGet = async <T>(
   } catch (error) {
     throw handleAxiosError(error, "Spotify API request failed");
   }
-};
-
-const handleAxiosError = (error: unknown, defaultMessage: string) => {
-  if (axios.isAxiosError(error)) {
-    console.error(error.response);
-    return new Error(error.response?.data?.error?.message ?? defaultMessage);
-  }
-
-  return new Error(defaultMessage);
 };
