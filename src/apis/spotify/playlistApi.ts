@@ -1,4 +1,4 @@
-import { spotifyGet } from "./client";
+import { spotifyGet } from "../../utils/clientTokenClient";
 import type { PlaylistTrackObject } from "../../models/playlist";
 
 export interface PlaylistTracksResponse {

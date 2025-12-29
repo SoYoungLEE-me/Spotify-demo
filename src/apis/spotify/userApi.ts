@@ -1,17 +1,6 @@
-import axios from "axios";
-import { SPOTIFY_BASE_URL } from "../../configs/commonConfig";
 import type { User } from "../../models/user";
+import { spotifyUserGet } from "../../utils/userTokenClient";
 
-export const getCurrentUserProfile = async (): Promise<User> => {
-  try {
-    const response = await axios.get(`${SPOTIFY_BASE_URL}/me`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Fail to fetch user profile", error);
-    throw error;
-  }
+export const getCurrentUserProfile = (): Promise<User> => {
+  return spotifyUserGet<User>("/me");
 };
