@@ -44,8 +44,8 @@ const LibraryPlaylist = ({ playlist }: LibraryPlaylistProps) => {
         )}
       </Box>
 
-      <Box overflow="hidden">
-        <Typography variant="body2" noWrap>
+      <Box minWidth={0} overflow="hidden" flex={1}>
+        <Typography variant="body2" noWrap title={playlist.name}>
           {playlist.name}
         </Typography>
 

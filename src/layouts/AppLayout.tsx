@@ -15,9 +15,8 @@ const Layout = styled("div")({
 });
 
 const Sidebar = styled("div")(({ theme }) => ({
-  maxWidth: "290px",
-  minWidth: "240px",
-  height: "100%",
+  width: "270px",
+  minHeight: 0,
   display: "flex",
   flexDirection: "column",
   [theme.breakpoints.down("sm")]: {
@@ -125,6 +124,7 @@ const AppLayout = () => {
             marginTop: "8px",
             display: "flex",
             flexDirection: "column",
+            minHeight: 0,
           }}
         >
           <LibraryHead />
@@ -143,3 +143,7 @@ const AppLayout = () => {
 };
 
 export default AppLayout;
+
+//sidebar에서 주의점:
+//flex 레이아웃에서 자식은 min-height: auto면 내용만큼 늘아게 됨. overflow가 안 생김
+//그래서 height를 위에서 고정하고 min-height: 0; 이렇게 해줘야 크기가 고정되고 overflow가 생겨 스크롤이 생길 수 있음

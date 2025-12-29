@@ -13,6 +13,7 @@ export interface PlaylistTrackObject {
 }
 
 export type Playlists = ApiResponse<SimplifiedPlaylistObject>;
+
 export interface SimplifiedPlaylistObject {
   collaborative?: boolean;
   description?: string;
