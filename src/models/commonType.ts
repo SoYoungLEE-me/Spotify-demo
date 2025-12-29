@@ -31,3 +31,13 @@ export interface Owner {
   uri?: string;
   display_name?: string | null;
 }
+
+export interface Followers {
+  href?: string;
+  total?: number;
+}
+
+export interface ExplicitContents {
+  filter_enabled?: boolean;
+  filter_locked?: boolean;
+}
