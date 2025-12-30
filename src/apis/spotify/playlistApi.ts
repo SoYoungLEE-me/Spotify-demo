@@ -3,6 +3,7 @@ import type {
   PlaylistTrackObject,
   GetCurrentUserPlaylistsRequest,
   Playlists,
+  Playlist,
 } from "../../models/playlist";
 
 import { spotifyUserGet } from "../../utils/userTokenClient";
@@ -38,4 +39,13 @@ export const getCurrentUserPlaylists = async ({
     limit,
     offset,
   });
+};
+
+export const getPlaylist = async (
+  token: string,
+  playlistId: string
+): Promise<Playlist> => {
+  const cleanId = playlistId.trim();
+
+  return spotifyGet<Playlist>(`/playlists/${cleanId}`, token);
 };

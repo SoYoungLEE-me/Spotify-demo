@@ -10,7 +10,7 @@ const Navbar = () => {
       display="flex"
       justifyContent="flex-end"
       alignItems="center"
-      height="64px"
+      height="60px"
       width="100%"
     >
       {userProfile ? <Profile /> : <LoginButton />}

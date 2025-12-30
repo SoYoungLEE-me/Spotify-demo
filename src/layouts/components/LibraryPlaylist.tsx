@@ -3,9 +3,15 @@ import type { SimplifiedPlaylistObject } from "../../models/playlist";
 
 interface LibraryPlaylistProps {
   playlist: SimplifiedPlaylistObject;
+  isActive: boolean;
+  onClick: (id: string) => void;
 }
 
-const LibraryPlaylist = ({ playlist }: LibraryPlaylistProps) => {
+const LibraryPlaylist = ({
+  playlist,
+  isActive,
+  onClick,
+}: LibraryPlaylistProps) => {
   const imageUrl = playlist.images?.[0]?.url;
 
   return (
@@ -16,12 +22,24 @@ const LibraryPlaylist = ({ playlist }: LibraryPlaylistProps) => {
       px={1}
       py={0.5}
       borderRadius="6px"
-      sx={{
+      onClick={() => onClick(playlist.id!)}
+      sx={(theme) => ({
         cursor: "pointer",
+        color: "inherit",
+
         "&:hover": {
-          backgroundColor: "rgba(255,255,255,0.08)",
+          backgroundColor: theme.palette.action.hover,
         },
-      }}
+
+        "&:active": {
+          backgroundColor: theme.palette.action.hover,
+          transform: "scale(0.985)",
+        },
+
+        ...(isActive && {
+          backgroundColor: theme.palette.action.selected,
+        }),
+      })}
     >
       <Box
         width={48}

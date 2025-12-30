@@ -5,8 +5,13 @@ import useGetCurrentUserPlaylists from "../../hooks/useGetCurrentUserPlaylists";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import { ScaleLoader } from "react-spinners";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 
 const Library = () => {
+  const navigate = useNavigate();
+  const [activeId, setActiveId] = useState<string | null>(null);
+
   const { ref, inView } = useInView({
     threshold: 0,
   });
@@ -26,6 +31,11 @@ const Library = () => {
   if (!data || playlists.length === 0) {
     return <EmptyPlayList />;
   }
+
+  const handleClick = (id: string) => {
+    setActiveId(id);
+    navigate(`/playlist/${id}`);
+  };
 
   return (
     <Box
@@ -53,7 +63,12 @@ const Library = () => {
       }}
     >
       {playlists.map((playlist) => (
-        <LibraryPlaylist key={playlist.id} playlist={playlist} />
+        <LibraryPlaylist
+          key={playlist.id}
+          playlist={playlist}
+          isActive={playlist.id === activeId}
+          onClick={handleClick}
+        />
       ))}
 
       {/* Infinite scroll sentinel */}

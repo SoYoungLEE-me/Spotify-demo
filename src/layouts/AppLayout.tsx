@@ -15,9 +15,10 @@ const Layout = styled("div")({
 });
 
 const Sidebar = styled("div")(({ theme }) => ({
-  width: "270px",
-  minHeight: 0,
+  width: "250px",
   display: "flex",
+  flexShrink: 0,
+  flexGrow: 0,
   flexDirection: "column",
   [theme.breakpoints.down("sm")]: {
     display: "none",
