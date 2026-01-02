@@ -13,14 +13,14 @@ const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
     <Box
       position="relative"
       sx={{
-        marginTop: { xs: "16px", md: "35px" },
+        marginTop: { xs: "16px", md: "24px" },
         marginX: { xs: "12px", md: "24px" },
         borderRadius: { xs: "20px", md: "32px" },
-        padding: { xs: "24px 20px", md: "48px 32px 32px" },
+        padding: { xs: "24px 20px", md: "32px 24px 24px" },
         overflow: "hidden",
         background: "linear-gradient(to bottom, #2c3e50, #121212)",
         boxShadow: "0 4px 60px rgba(0,0,0,0.5)",
-        minHeight: { xs: "auto", md: "340px" },
+        minHeight: { xs: "auto", md: "260px" },
       }}
     >
       {imageUrl && (
@@ -59,14 +59,14 @@ const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
         position="relative"
         zIndex={2}
         display="flex"
-        gap={{ xs: 3, md: 5 }}
+        gap={{ xs: 3, md: 4 }}
         alignItems={{ xs: "center", md: "flex-end" }}
         flexDirection={{ xs: "column", md: "row" }}
         textAlign={{ xs: "center", md: "left" }}
       >
         <Box
-          width={{ xs: 160, md: 240 }}
-          height={{ xs: 160, md: 240 }}
+          width={{ xs: 160, md: 192 }}
+          height={{ xs: 160, md: 192 }}
           flexShrink={0}
           bgcolor="grey.900"
           display="flex"
@@ -93,7 +93,7 @@ const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
             />
           ) : (
             <AudiotrackIcon
-              sx={{ fontSize: { xs: 64, md: 96 }, color: "grey.600" }}
+              sx={{ fontSize: { xs: 64, md: 80 }, color: "grey.600" }}
             />
           )}
         </Box>
@@ -115,9 +115,9 @@ const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
             fontWeight={900}
             lineHeight={1}
             sx={{
-              fontSize: { xs: "28px", sm: "40px", md: "72px" },
+              fontSize: { xs: "28px", sm: "40px", md: "56px" },
               textShadow: "0 4px 12px rgba(0,0,0,0.5)",
-              mb: { xs: 1, md: 2 },
+              mb: { xs: 1, md: 1.5 },
               wordBreak: "keep-all",
             }}
           >
@@ -131,7 +131,7 @@ const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
               maxWidth={700}
               sx={{
                 mb: 1,
-                fontSize: { xs: "0.875rem", md: "1rem" },
+                fontSize: { xs: "0.875rem", md: "0.95rem" },
                 display: "-webkit-box",
                 WebkitLineClamp: 2,
                 WebkitBoxOrient: "vertical",
@@ -149,7 +149,7 @@ const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
             justifyContent={{ xs: "center", md: "flex-start" }}
             mt={{ xs: 1, md: 0 }}
           >
-            <Typography fontWeight={700} fontSize={{ xs: 14, md: 15 }}>
+            <Typography fontWeight={700} fontSize={{ xs: 14, md: 14 }}>
               {playlist.owner?.display_name}
             </Typography>
             <Box
@@ -163,7 +163,7 @@ const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
             />
             <Typography
               fontWeight={400}
-              fontSize={{ xs: 14, md: 15 }}
+              fontSize={{ xs: 14, md: 14 }}
               color="rgba(255,255,255,0.8)"
             >
               {playlist.tracks?.total

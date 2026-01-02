@@ -50,6 +50,7 @@ const PlayListDetailPage = () => {
       <PlaylistHeader playlist={playlist} />
 
       <Box
+        marginTop="10px"
         flex={1}
         minHeight={0}
         overflow="auto"
