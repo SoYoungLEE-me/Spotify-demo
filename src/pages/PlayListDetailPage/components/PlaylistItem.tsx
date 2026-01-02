@@ -14,6 +14,13 @@ const isTrackObject = (track: PlayableItem): track is TrackObject => {
   return track.type === "track";
 };
 
+const formatDuration = (ms?: number) => {
+  if (!ms) return "0:00";
+  const minutes = Math.floor(ms / 60000);
+  const seconds = ((ms % 60000) / 1000).toFixed(0);
+  return `${minutes}:${Number(seconds) < 10 ? "0" : ""}${seconds}`;
+};
+
 const PlaylistItem = ({ item, index }: PlaylistItemProps) => {
   const track = item.track;
   const [isHovered, setIsHovered] = useState(false);
@@ -30,13 +37,19 @@ const PlaylistItem = ({ item, index }: PlaylistItemProps) => {
 
   const contextName = isTrack ? track.album?.name : track.show?.name;
 
+  const duration = isTrack ? formatDuration(track.duration_ms) : "";
+
   return (
     <Box
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       sx={{
         display: "grid",
-        gridTemplateColumns: "50px 4fr 2fr",
+
+        gridTemplateColumns: {
+          xs: "50px 1fr",
+          md: "50px 6fr 4fr 60px",
+        },
         alignItems: "center",
         padding: "8px 16px",
         borderRadius: "8px",
@@ -89,6 +102,17 @@ const PlaylistItem = ({ item, index }: PlaylistItemProps) => {
       <Box overflow="hidden" display={{ xs: "none", md: "block" }}>
         <Typography variant="body2" color="text.secondary" noWrap fontSize={14}>
           {contextName}
+        </Typography>
+      </Box>
+
+      <Box display={{ xs: "none", md: "flex" }} justifyContent="flex-end">
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          fontSize={14}
+          fontFamily="monospace"
+        >
+          {duration}
         </Typography>
       </Box>
     </Box>

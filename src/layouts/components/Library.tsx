@@ -56,9 +56,8 @@ const Library = () => {
           backgroundColor: "rgba(255,255,255,0.25)",
           borderRadius: "4px",
         },
-
         "&::-webkit-scrollbar-button": {
-          display: "width: 0, height: 0",
+          display: "none",
         },
         "&::-webkit-scrollbar-corner": {
           background: "transparent",

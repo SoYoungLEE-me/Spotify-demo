@@ -12,17 +12,15 @@ const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
   return (
     <Box
       position="relative"
-      padding="64px 32px 32px"
-      overflow="hidden"
       sx={{
-        marginTop: "35px",
-        marginX: "24px",
-        borderRadius: "32px",
-        position: "relative",
-        padding: "48px 32px 32px",
+        marginTop: { xs: "16px", md: "35px" },
+        marginX: { xs: "12px", md: "24px" },
+        borderRadius: { xs: "20px", md: "32px" },
+        padding: { xs: "24px 20px", md: "48px 32px 32px" },
         overflow: "hidden",
         background: "linear-gradient(to bottom, #2c3e50, #121212)",
         boxShadow: "0 4px 60px rgba(0,0,0,0.5)",
+        minHeight: { xs: "auto", md: "340px" },
       }}
     >
       {imageUrl && (
@@ -61,17 +59,14 @@ const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
         position="relative"
         zIndex={2}
         display="flex"
-        gap={5}
-        alignItems="flex-end"
-        sx={{
-          flexDirection: { xs: "column", md: "row" },
-          alignItems: { xs: "center", md: "flex-end" },
-          textAlign: { xs: "center", md: "left" },
-        }}
+        gap={{ xs: 3, md: 5 }}
+        alignItems={{ xs: "center", md: "flex-end" }}
+        flexDirection={{ xs: "column", md: "row" }}
+        textAlign={{ xs: "center", md: "left" }}
       >
         <Box
-          width={240}
-          height={240}
+          width={{ xs: 160, md: 240 }}
+          height={{ xs: 160, md: 240 }}
           flexShrink={0}
           bgcolor="grey.900"
           display="flex"
@@ -97,7 +92,9 @@ const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
               style={{ objectFit: "cover" }}
             />
           ) : (
-            <AudiotrackIcon sx={{ fontSize: 96, color: "grey.600" }} />
+            <AudiotrackIcon
+              sx={{ fontSize: { xs: 64, md: 96 }, color: "grey.600" }}
+            />
           )}
         </Box>
 
@@ -105,18 +102,22 @@ const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
           <Typography
             variant="overline"
             fontWeight={700}
-            sx={{ letterSpacing: 2, opacity: 0.8 }}
+            sx={{
+              letterSpacing: 2,
+              opacity: 0.8,
+              display: { xs: "none", md: "block" },
+            }}
           >
             {playlist.type}
           </Typography>
 
           <Typography
-            fontSize={{ xs: 32, md: 72 }}
             fontWeight={900}
             lineHeight={1}
             sx={{
+              fontSize: { xs: "28px", sm: "40px", md: "72px" },
               textShadow: "0 4px 12px rgba(0,0,0,0.5)",
-              mb: 2,
+              mb: { xs: 1, md: 2 },
               wordBreak: "keep-all",
             }}
           >
@@ -130,6 +131,7 @@ const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
               maxWidth={700}
               sx={{
                 mb: 1,
+                fontSize: { xs: "0.875rem", md: "1rem" },
                 display: "-webkit-box",
                 WebkitLineClamp: 2,
                 WebkitBoxOrient: "vertical",
@@ -145,8 +147,9 @@ const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
             alignItems="center"
             gap={1}
             justifyContent={{ xs: "center", md: "flex-start" }}
+            mt={{ xs: 1, md: 0 }}
           >
-            <Typography fontWeight={700} fontSize={15}>
+            <Typography fontWeight={700} fontSize={{ xs: 14, md: 15 }}>
               {playlist.owner?.display_name}
             </Typography>
             <Box
@@ -160,7 +163,7 @@ const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
             />
             <Typography
               fontWeight={400}
-              fontSize={15}
+              fontSize={{ xs: 14, md: 15 }}
               color="rgba(255,255,255,0.8)"
             >
               {playlist.tracks?.total
@@ -175,5 +178,4 @@ const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
 };
 
 export default PlaylistHeader;
-
 // Atmospheric Background로 배경에 앨범 아트를 흐리게 깔 수 있음
