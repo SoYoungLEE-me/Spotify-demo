@@ -12,6 +12,8 @@ const Layout = styled("div")({
   height: "100vh",
   padding: "10px",
   gap: "12px",
+  boxSizing: "border-box",
+  overflow: "hidden",
 });
 
 const Sidebar = styled("div")(({ theme }) => ({
@@ -20,9 +22,22 @@ const Sidebar = styled("div")(({ theme }) => ({
   flexShrink: 0,
   flexGrow: 0,
   flexDirection: "column",
+  height: "100%",
   [theme.breakpoints.down("sm")]: {
     display: "none",
   },
+}));
+
+const MainContainer = styled(Box)(({ theme }) => ({
+  borderRadius: "8px",
+  backgroundColor: theme.palette.background.paper,
+  color: theme.palette.text.primary,
+  flex: 1,
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+  overflow: "hidden",
+  minWidth: 0,
 }));
 
 const ContentBox = styled(Box)(({ theme }) => ({
@@ -133,12 +148,23 @@ const AppLayout = () => {
         </ContentBox>
       </Sidebar>
 
-      <ContentBox padding="20px">
+      <MainContainer padding="20px">
         <Navbar />
-        <main>
+
+        <Box
+          component="main"
+          sx={{
+            flex: 1,
+            minHeight: 0,
+            display: "flex",
+            flexDirection: "column",
+            overflow: "hidden",
+            position: "relative",
+          }}
+        >
           <Outlet />
-        </main>
-      </ContentBox>
+        </Box>
+      </MainContainer>
     </Layout>
   );
 };

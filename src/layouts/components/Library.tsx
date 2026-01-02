@@ -57,6 +57,12 @@ const Library = () => {
           borderRadius: "4px",
         },
 
+        "&::-webkit-scrollbar-button": {
+          display: "width: 0, height: 0",
+        },
+        "&::-webkit-scrollbar-corner": {
+          background: "transparent",
+        },
         "&:hover::-webkit-scrollbar-thumb": {
           backgroundColor: "rgba(255,255,255,0.4)",
         },

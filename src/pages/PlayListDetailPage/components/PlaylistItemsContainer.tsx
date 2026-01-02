@@ -1,19 +1,39 @@
 import type { InfiniteData } from "@tanstack/react-query";
 import type { Tracks } from "../../../models/track";
-import type { PlaylistTrackObject } from "../../../models/playlist";
 import PlaylistItem from "./PlaylistItem";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
+import { Box } from "@mui/material";
+import { ScaleLoader } from "react-spinners";
 
 interface Props {
   playlistItems: InfiniteData<Tracks>;
+  fetchNextPage: () => void;
+  hasNextPage?: boolean;
+  isFetchingNextPage: boolean;
 }
 
-const PlaylistItemsContainer = ({ playlistItems }: Props) => {
-  const items: PlaylistTrackObject[] = playlistItems.pages.flatMap(
-    (page) => page.items
-  );
+const PlaylistItemsContainer = ({
+  playlistItems,
+  fetchNextPage,
+  hasNextPage,
+  isFetchingNextPage,
+}: Props) => {
+  const items = playlistItems.pages.flatMap((page) => page.items);
+
+  const { ref, inView } = useInView({
+    rootMargin: "200px 0px",
+    threshold: 0,
+  });
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
-    <div>
+    <Box>
       {items.map((item, index) => (
         <PlaylistItem
           key={`${item.added_at}-${index}`}
@@ -21,7 +41,15 @@ const PlaylistItemsContainer = ({ playlistItems }: Props) => {
           index={index}
         />
       ))}
-    </div>
+
+      {isFetchingNextPage && (
+        <Box display="flex" justifyContent="center" py={2}>
+          <ScaleLoader color="#F43F5E" height={18} />
+        </Box>
+      )}
+
+      <div ref={ref} style={{ height: 1 }} />
+    </Box>
   );
 };
 

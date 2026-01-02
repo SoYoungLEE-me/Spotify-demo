@@ -7,7 +7,7 @@ const useGetPlaylistItems = (params: GetPlaylistItemRequest) => {
   const clientCredentialToken = useClientCredentialToken();
 
   return useInfiniteQuery({
-    queryKey: ["playlist-items", params],
+    queryKey: ["playlist-items", params.playlist_id, params.limit],
     enabled: !!clientCredentialToken && !!params.playlist_id,
     queryFn: ({ pageParam = 0 }) =>
       getPlaylistItems({
