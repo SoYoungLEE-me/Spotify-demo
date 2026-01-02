@@ -5,8 +5,10 @@ import type { GetCurrentUserPlaylistsRequest } from "../models/playlist";
 const useGetCurrentUserPlaylists = ({
   limit,
 }: GetCurrentUserPlaylistsRequest) => {
+  const access_token = localStorage.getItem("access_token");
   return useInfiniteQuery({
     queryKey: ["current-user-playlists"],
+    enabled: !!access_token,
     queryFn: ({ pageParam = 0 }) => {
       return getCurrentUserPlaylists({ limit, offset: pageParam });
     },

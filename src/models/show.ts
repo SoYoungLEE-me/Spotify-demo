@@ -15,7 +15,7 @@ export interface SimplifiedShow {
   media_type: string;
   name: string;
   publisher: string;
-  type: string;
+  type: "show";
   uri: string;
   total_episodes: number;
 }

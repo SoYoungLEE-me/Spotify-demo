@@ -107,7 +107,7 @@ const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
             fontWeight={700}
             sx={{ letterSpacing: 2, opacity: 0.8 }}
           >
-            PLAYLIST
+            {playlist.type}
           </Typography>
 
           <Typography

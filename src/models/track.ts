@@ -2,7 +2,7 @@ import type { ExternalUrls, External_ids, Restriction } from "./commonType";
 import type { SimplifiedAlbum } from "./album";
 import type { Artist } from "./artist";
 import type { PlaylistTrackObject } from "./playlist";
-
+import type { ApiResponse } from "./apiResponse";
 interface LinkedTrack {
   external_urls: ExternalUrls;
   href: string;
@@ -11,15 +11,7 @@ interface LinkedTrack {
   uri: string;
 }
 
-export interface Tracks {
-  href: string;
-  limit: number;
-  next: string | null;
-  offset: number;
-  previous: string | null;
-  total: number;
-  items: PlaylistTrackObject[];
-}
+export type Tracks = ApiResponse<PlaylistTrackObject>;
 
 export interface TrackObject {
   album?: SimplifiedAlbum;

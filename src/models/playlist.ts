@@ -51,3 +51,8 @@ export interface GetPlaylistRequest {
   fields?: string;
   additional_types?: string;
 }
+
+export interface GetPlaylistItemRequest extends GetPlaylistRequest {
+  offset?: number;
+  limit?: number;
+}
