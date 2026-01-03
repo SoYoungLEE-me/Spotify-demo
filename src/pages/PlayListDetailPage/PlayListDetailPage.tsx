@@ -34,15 +34,17 @@ const PlayListDetailPage = () => {
   const isLoading = isPlaylistLoading || isPlaylistItemsLoading;
   const error = playlistError || playlistItemsError;
 
+  const accessToken = localStorage.getItem("access_token");
+
+  if (!accessToken) {
+    return <AuthErrorFallback />;
+  }
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
   if (error) {
-    if (error.message.includes("401")) {
-      return <AuthErrorFallback />;
-    }
-
     return <ErrorMessage errorMessage={error.message} />;
   }
 
