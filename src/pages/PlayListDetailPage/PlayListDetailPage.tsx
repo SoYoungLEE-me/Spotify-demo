@@ -6,6 +6,7 @@ import LoadingSpinner from "../../common/components/LoadingSpinner";
 import ErrorMessage from "../../common/components/ErrorMessage";
 import PlaylistHeader from "./components/PlaylistHeader";
 import PlaylistItemsContainer from "./components/PlaylistItemsContainer";
+import AuthErrorFallback from "../../common/components/AuthErrorFallback";
 
 const PlayListDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -38,6 +39,10 @@ const PlayListDetailPage = () => {
   }
 
   if (error) {
+    if (error.message.includes("401")) {
+      return <AuthErrorFallback />;
+    }
+
     return <ErrorMessage errorMessage={error.message} />;
   }
 

@@ -1,26 +1,22 @@
-import Avatar from "@mui/material/Avatar";
-import PersonIcon from "@mui/icons-material/Person";
+import { Box } from "@mui/material";
+import LoginButton from "../../common/components/LoginButton";
 import useGetCurrentUserProfile from "../../hooks/useGetCurrentUserProfile";
+import ProfileMenu from "./ProfileMenu";
 
-const Profile = () => {
+const Navbar = () => {
   const { data: userProfile } = useGetCurrentUserProfile();
 
-  const imageUrl = userProfile?.images?.[0]?.url;
-
   return (
-    <Avatar
-      src={imageUrl}
-      alt={userProfile?.display_name ?? "user"}
-      sx={{
-        width: 50,
-        height: 50,
-        bgcolor: "grey.700",
-        cursor: "pointer",
-      }}
+    <Box
+      display="flex"
+      justifyContent="flex-end"
+      alignItems="center"
+      height="60px"
+      width="100%"
     >
-      <PersonIcon sx={{ fontSize: 32 }} />
-    </Avatar>
+      {userProfile ? <ProfileMenu /> : <LoginButton />}
+    </Box>
   );
 };
 
-export default Profile;
+export default Navbar;
