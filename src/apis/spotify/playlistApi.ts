@@ -1,10 +1,11 @@
-import { spotifyGet } from "../../utils/clientTokenClient";
+import { spotifyGet, spotifyPost } from "../../utils/clientTokenClient";
 import type {
   PlaylistTrackObject,
   GetCurrentUserPlaylistsRequest,
   Playlists,
   Playlist,
   GetPlaylistItemRequest,
+  CreatePlaylistRequest,
 } from "../../models/playlist";
 
 import { spotifyUserGet } from "../../utils/userTokenClient";
@@ -80,4 +81,12 @@ export const getPlaylistItems = async (
     `/playlists/${cleanId}/tracks?${searchParams.toString()}`,
     token
   );
+};
+
+export const createPlaylist = async (
+  token: string,
+  userId: string,
+  params: CreatePlaylistRequest
+): Promise<Playlist> => {
+  return spotifyPost<Playlist>(`/users/${userId}/playlists`, token, params);
 };

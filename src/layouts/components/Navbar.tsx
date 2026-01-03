@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import LoginButton from "../../common/components/LoginButton";
 import useGetCurrentUserProfile from "../../hooks/useGetCurrentUserProfile";
 import Profile from "./Profile";
+
 const Navbar = () => {
   const { data: userProfile } = useGetCurrentUserProfile();
 

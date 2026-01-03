@@ -1,6 +1,7 @@
 import { styled, Typography, Box, Button } from "@mui/material";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import AddIcon from "@mui/icons-material/Add";
+import useCreatePlaylist from "../../hooks/useCreatePlaylist";
 
 const Head = styled("div")(({ theme }) => ({
   display: "flex",
@@ -20,6 +21,12 @@ const HeadIcon = styled(LibraryMusicIcon)(({ theme }) => ({
 }));
 
 const LibraryHead = () => {
+  const { mutate: createPlaylist } = useCreatePlaylist();
+
+  const handleCreatePlaylist = () => {
+    createPlaylist({ name: "나의 플레이리스트" });
+  };
+
   return (
     <Head>
       <Box display="flex" gap="12px" alignItems="center" className="head">
@@ -27,7 +34,7 @@ const LibraryHead = () => {
         <Typography fontWeight={700}>Your Library</Typography>
       </Box>
       <Button size="small">
-        <AddIcon />
+        <AddIcon onClick={handleCreatePlaylist} />
       </Button>
     </Head>
   );

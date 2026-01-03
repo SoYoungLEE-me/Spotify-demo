@@ -56,3 +56,10 @@ export interface GetPlaylistItemRequest extends GetPlaylistRequest {
   offset?: number;
   limit?: number;
 }
+
+export interface CreatePlaylistRequest {
+  name: string;
+  public?: boolean;
+  collaborative?: boolean;
+  description?: string;
+}

@@ -17,3 +17,21 @@ export const spotifyGet = async <T>(
     throw handleAxiosError(error, "Spotify API request failed");
   }
 };
+
+export const spotifyPost = async <T>(
+  endpoint: string,
+  token: string,
+  body?: unknown
+): Promise<T> => {
+  try {
+    const response = await axios.post(`${SPOTIFY_BASE_URL}${endpoint}`, body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw handleAxiosError(error, "Spotify API POST request failed");
+  }
+};
