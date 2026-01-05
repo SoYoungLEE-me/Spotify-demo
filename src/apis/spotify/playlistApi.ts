@@ -5,6 +5,8 @@ import type {
   Playlist,
   GetPlaylistItemRequest,
   CreatePlaylistRequest,
+  AddItemsToPlaylistRequest,
+  AddItemsToPlaylistResponse,
 } from "../../models/playlist";
 
 import { spotifyUserGet } from "../../utils/userTokenClient";
@@ -53,4 +55,16 @@ export const createPlaylist = async (
   params: CreatePlaylistRequest
 ): Promise<Playlist> => {
   return spotifyPost<Playlist>(`/users/${userId}/playlists`, token, params);
+};
+
+export const addItemsToPlaylist = async (
+  token: string,
+  playlistId: string,
+  body: AddItemsToPlaylistRequest
+): Promise<AddItemsToPlaylistResponse> => {
+  return spotifyPost<AddItemsToPlaylistResponse>(
+    `/playlists/${playlistId}/tracks`,
+    token,
+    body
+  );
 };

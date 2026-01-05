@@ -44,26 +44,15 @@ const Library = () => {
       overflow="scroll"
       sx={{
         scrollbarWidth: "thin",
-        scrollbarColor: "rgba(255,255,255,0.25) transparent",
-
-        "&::-webkit-scrollbar": {
-          width: "6px",
-        },
-        "&::-webkit-scrollbar-track": {
-          background: "transparent",
-        },
+        scrollbarColor: "rgba(255,255,255,0.2) transparent",
+        "&::-webkit-scrollbar": { width: "6px" },
+        "&::-webkit-scrollbar-track": { background: "transparent" },
         "&::-webkit-scrollbar-thumb": {
-          backgroundColor: "rgba(255,255,255,0.25)",
-          borderRadius: "4px",
-        },
-        "&::-webkit-scrollbar-button": {
-          display: "none",
-        },
-        "&::-webkit-scrollbar-corner": {
-          background: "transparent",
+          backgroundColor: "rgba(255,255,255,0.2)",
+          borderRadius: "3px",
         },
         "&:hover::-webkit-scrollbar-thumb": {
-          backgroundColor: "rgba(255,255,255,0.4)",
+          backgroundColor: "rgba(255,255,255,0.3)",
         },
       }}
     >

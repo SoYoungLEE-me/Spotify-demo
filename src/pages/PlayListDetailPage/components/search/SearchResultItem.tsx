@@ -1,11 +1,45 @@
 import { Box, Button, Typography } from "@mui/material";
 import type { TrackObject } from "../../../../models/track";
-
+import { useParams } from "react-router";
+import useAddItemsToPlaylist from "../../../../hooks/useAddItemsToPlaylist";
+import AppSnackbar from "../../../../common/components/AppSnackbar";
+import { useState } from "react";
 interface SearchResultItemProps {
   track: TrackObject;
 }
 
 const SearchResultItem = ({ track }: SearchResultItemProps) => {
+  const { id: playlistId } = useParams<{ id: string }>();
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackMessage, setSnackMessage] = useState("");
+  const [snackSeverity, setSnackSeverity] = useState<"success" | "error">(
+    "success"
+  );
+
+  const { mutate: addItems, isPending } = useAddItemsToPlaylist(playlistId!);
+
+  const handleAdd = () => {
+    if (!track.uri) return;
+
+    addItems(
+      {
+        uris: [track.uri],
+      },
+      {
+        onSuccess: () => {
+          setSnackMessage("Added to playlist");
+          setSnackSeverity("success");
+          setOpenSnackbar(true);
+        },
+        onError: () => {
+          setSnackMessage("Failed to add track");
+          setSnackSeverity("error");
+          setOpenSnackbar(true);
+        },
+      }
+    );
+  };
+
   const artistNames =
     track.artists?.map((a) => a.name).join(", ") ?? "Unknown Artist";
   const albumImage = track.album?.images?.[0]?.url;
@@ -73,7 +107,16 @@ const SearchResultItem = ({ track }: SearchResultItemProps) => {
         </Box>
       </Box>
 
-      <Button size="small">추가</Button>
+      <Button size="small" onClick={handleAdd} disabled={isPending}>
+        {isPending ? "Adding…" : "Add"}
+      </Button>
+
+      <AppSnackbar
+        open={openSnackbar}
+        message={snackMessage}
+        severity={snackSeverity}
+        onClose={() => setOpenSnackbar(false)}
+      />
     </Box>
   );
 };
