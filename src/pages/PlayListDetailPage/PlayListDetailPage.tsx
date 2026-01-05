@@ -66,6 +66,8 @@ const PlayListDetailPage = () => {
 
   return (
     <Box display="flex" flexDirection="column" height="100vh" overflow="hidden">
+      {isSearchOpen && <SearchOverlay onClose={() => setIsSearchOpen(false)} />}
+
       <PlaylistHeader playlist={playlist} />
       <Box padding="10px 16px" display="flex" justifyContent="flex-end">
         <AddTrackButton onClick={() => setIsSearchOpen((prev) => !prev)} />
@@ -110,9 +112,6 @@ const PlayListDetailPage = () => {
             />
           )}
         </Box>
-        {isSearchOpen && (
-          <SearchOverlay onClose={() => setIsSearchOpen(false)} />
-        )}
       </Box>
     </Box>
   );

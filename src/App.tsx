@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Suspense } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router";
-import LoadingSpinner from "./common/components/LoadingSpinner";
+import { Box, Typography } from "@mui/material";
 const AppLayout = React.lazy(() => import("./layouts/AppLayout"));
 const HomePage = React.lazy(() => import("./pages/HomePage/HomePage"));
 const SearchPage = React.lazy(() => import("./pages/SearchPage/SearchPage"));
@@ -43,7 +43,25 @@ function App() {
 
   return (
     <div>
-      <Suspense fallback={<LoadingSpinner />}>
+      <Suspense
+        fallback={
+          <Box
+            height="100vh"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Typography
+              fontSize="1.4rem"
+              fontWeight={700}
+              color="white"
+              sx={{ letterSpacing: "-0.02em" }}
+            >
+              YourMusic
+            </Typography>
+          </Box>
+        }
+      >
         <Routes>
           <Route element={<AppLayout />}>
             <Route path="/" element={<HomePage />} />

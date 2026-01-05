@@ -1,5 +1,4 @@
 import { Box, IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 import SearchSection from "./SearchSection";
 
 type Props = {
@@ -33,14 +32,20 @@ const SearchOverlay = ({ onClose }: Props) => {
         <IconButton
           onClick={onClose}
           sx={{
+            display: "flex",
+            gap: "6px",
+            px: "10px",
+            py: "6px",
+            borderRadius: "999px",
             color: "rgba(255,255,255,0.7)",
+            fontSize: "0.85rem",
             "&:hover": {
               color: "white",
-              bgcolor: "rgba(255,255,255,0.1)",
+              bgcolor: "rgba(255,255,255,0.12)",
             },
           }}
         >
-          <CloseIcon fontSize="medium" />
+          Close
         </IconButton>
       </Box>
 
