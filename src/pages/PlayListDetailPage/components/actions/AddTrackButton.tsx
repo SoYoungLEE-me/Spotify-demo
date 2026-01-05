@@ -8,7 +8,7 @@ interface Props {
 const AddTrackButton = ({ onClick }: Props) => {
   return (
     <Button size="small" startIcon={<AddIcon />} onClick={onClick}>
-      곡 추가하기
+      Add songs
     </Button>
   );
 };

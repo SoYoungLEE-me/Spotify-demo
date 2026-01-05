@@ -14,6 +14,18 @@ const SearchResultList = ({
   hasNextPage,
   isFetchingNextPage,
 }: SearchResultListProps) => {
+  if (tracks.length === 0) {
+    return (
+      <Box
+        padding="24px"
+        textAlign="center"
+        color="rgba(255,255,255,0.5)"
+        marginTop="150px"
+      >
+        No results found
+      </Box>
+    );
+  }
   return (
     <Box display="flex" flexDirection="column" gap={1}>
       {tracks.map((track) => (

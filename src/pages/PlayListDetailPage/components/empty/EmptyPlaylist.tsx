@@ -11,10 +11,12 @@ const EmptyPlaylist = () => {
       height="100%"
       color="text.secondary"
     >
-      <Typography fontWeight={600}>
-        아직 이 플레이리스트에 곡이 없어요
+      <Typography fontWeight={700}>
+        There are no songs in this playlist yet
       </Typography>
-      <Typography variant="body2">검색해서 곡을 추가해보세요</Typography>
+      <Typography variant="body2" marginTop="10px">
+        Search for songs to add to your playlist
+      </Typography>
     </Box>
   );
 };
