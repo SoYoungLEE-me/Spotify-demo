@@ -1,13 +1,15 @@
 import { Box, Button, Typography } from "@mui/material";
+import type { TrackObject } from "../../../../models/track";
 
-type Track = {
-  id: string;
-  name: string;
-  artist: string;
-  albumUrl?: string;
-};
+interface SearchResultItemProps {
+  track: TrackObject;
+}
 
-const SearchResultItem = ({ track }: { track: Track }) => {
+const SearchResultItem = ({ track }: SearchResultItemProps) => {
+  const artistNames =
+    track.artists?.map((a) => a.name).join(", ") ?? "Unknown Artist";
+  const albumImage = track.album?.images?.[0]?.url;
+
   return (
     <Box
       display="flex"
@@ -28,6 +30,7 @@ const SearchResultItem = ({ track }: { track: Track }) => {
       }}
     >
       <Box display="flex" alignItems="center" gap={2} minWidth={0} flex={1}>
+        {/* Album Image */}
         <Box
           width={48}
           height={48}
@@ -35,15 +38,23 @@ const SearchResultItem = ({ track }: { track: Track }) => {
           borderRadius="4px"
           bgcolor="#333"
           overflow="hidden"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
         >
-          <Typography variant="caption" color="rgba(255,255,255,0.3)">
-            IMG
-          </Typography>
+          {albumImage ? (
+            <img
+              src={albumImage}
+              alt={track.name}
+              width="100%"
+              height="100%"
+              style={{ objectFit: "cover" }}
+            />
+          ) : (
+            <Typography variant="caption" color="rgba(255,255,255,0.3)">
+              IMG
+            </Typography>
+          )}
         </Box>
 
+        {/* Text */}
         <Box minWidth={0} display="flex" flexDirection="column">
           <Typography
             fontWeight={600}
@@ -57,12 +68,12 @@ const SearchResultItem = ({ track }: { track: Track }) => {
             noWrap
             sx={{ color: "rgba(255,255,255,0.6)", fontSize: "0.85rem" }}
           >
-            {track.artist}
+            {artistNames}
           </Typography>
         </Box>
       </Box>
 
-      <Button size="small">Add</Button>
+      <Button size="small">추가</Button>
     </Box>
   );
 };

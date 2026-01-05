@@ -1,6 +1,6 @@
 import type { ExternalUrls, Image, Owner } from "./commonType";
 import type { TrackObject, Tracks } from "./track";
-import type { EpisodeObject } from "./show";
+import type { SimplifiedEpisodeObject } from "./show";
 import type { ApiResponse } from "./apiResponse";
 
 export interface BasePlaylist {
@@ -18,7 +18,7 @@ export interface BasePlaylist {
   uri?: string;
 }
 
-export type PlayableItem = TrackObject | EpisodeObject;
+export type PlayableItem = TrackObject | SimplifiedEpisodeObject;
 
 export interface PlaylistTrackObject {
   added_at?: string;

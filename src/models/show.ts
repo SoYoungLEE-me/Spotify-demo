@@ -1,4 +1,11 @@
-import type { ExternalUrls, Image, Copyright, Restriction } from "./commonType";
+import type {
+  ExternalUrls,
+  Image,
+  Copyright,
+  Restriction,
+  Authors,
+  Narrator,
+} from "./commonType";
 
 export interface SimplifiedShow {
   available_markets: string[];
@@ -20,7 +27,7 @@ export interface SimplifiedShow {
   total_episodes: number;
 }
 
-export interface EpisodeObject {
+export interface SimplifiedEpisodeObject {
   description: string;
   html_description: string;
   duration_ms: number;
@@ -43,4 +50,26 @@ export interface EpisodeObject {
   uri: string;
   restrictions: Restriction;
   show: SimplifiedShow;
+}
+
+export interface SimplifiedAudiobookObject {
+  author: Authors;
+  available_markets: string[];
+  copyright: Copyright[];
+  description: string;
+  html_description: string;
+  edition?: string;
+  explicit: boolean;
+  external_url: ExternalUrls;
+  href: string;
+  id: string;
+  images: Image[];
+  languages: string[];
+  media_type: string;
+  name: string;
+  narrators: Narrator;
+  publisher: string;
+  type: string;
+  uri: string;
+  total_chapters: number;
 }

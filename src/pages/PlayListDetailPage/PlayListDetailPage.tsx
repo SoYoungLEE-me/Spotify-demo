@@ -47,7 +47,11 @@ const PlayListDetailPage = () => {
   }
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return (
+      <Box display="flex" justifyContent="center" paddingTop="300px">
+        <LoadingSpinner />
+      </Box>
+    );
   }
 
   if (error) {

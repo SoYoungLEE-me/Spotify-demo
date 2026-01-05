@@ -1,4 +1,4 @@
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import SearchSection from "./SearchSection";
 
@@ -24,19 +24,12 @@ const SearchOverlay = ({ onClose }: Props) => {
       flexDirection="column"
       padding="24px"
     >
-      {/* 헤더 영역 */}
       <Box
         display="flex"
         alignItems="center"
-        justifyContent="space-between"
-        marginBottom="24px"
-        borderBottom="1px solid rgba(255,255,255,0.1)"
-        paddingBottom="16px"
+        justifyContent="flex-end"
+        marginBottom="10px"
       >
-        <Typography variant="h5" fontWeight={700} color="white">
-          곡을 찾아보세요
-        </Typography>
-
         <IconButton
           onClick={onClose}
           sx={{

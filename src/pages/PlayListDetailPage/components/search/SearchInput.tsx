@@ -28,8 +28,8 @@ const SearchInput = ({ value, onChange }: Props) => {
 
       <InputBase
         value={value}
+        placeholder="Search for songs or artists (Type at least two characters)"
         onChange={(e) => onChange(e.target.value)}
-        placeholder="노래 또는 아티스트 검색"
         fullWidth
         autoFocus
         sx={{
@@ -58,3 +58,19 @@ const SearchInput = ({ value, onChange }: Props) => {
 };
 
 export default SearchInput;
+
+/*
+    InputBase는 MUI 컴포넌트라서
+    onChange의 이벤트 타입이 내부적으로 이미 정의돼 있음.
+
+    onChange?: React.ChangeEventHandler<
+      HTMLInputElement | HTMLTextAreaElement
+    >
+
+    그래서 e는 자동으로
+    React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    로 타입 추론됨.
+
+    → 별도의 타입 명시 없이도 e.target.value를
+      안전하게 사용할 수 있음.
+  */

@@ -41,3 +41,11 @@ export interface ExplicitContents {
   filter_enabled?: boolean;
   filter_locked?: boolean;
 }
+
+export interface Authors {
+  name?: string;
+}
+
+export interface Narrator {
+  name: string;
+}
