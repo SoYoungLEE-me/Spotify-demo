@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import type { Playlist } from "../../../models/playlist";
+import type { Playlist } from "../../../../models/playlist";
 import AudiotrackIcon from "@mui/icons-material/Audiotrack";
 
 interface PlaylistHeaderProps {

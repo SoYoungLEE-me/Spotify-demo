@@ -1,9 +1,9 @@
 import { Box, Typography, Avatar, IconButton } from "@mui/material";
-import type { PlaylistTrackObject } from "../../../models/playlist";
+import type { PlaylistTrackObject } from "../../../../models/playlist";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { useState } from "react";
-import type { TrackObject } from "../../../models/track";
-import type { PlayableItem } from "../../../models/playlist";
+import type { TrackObject } from "../../../../models/track";
+import type { PlayableItem } from "../../../../models/playlist";
 
 interface PlaylistItemProps {
   item: PlaylistTrackObject;

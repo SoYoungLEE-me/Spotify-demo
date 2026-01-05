@@ -1,5 +1,5 @@
 import type { InfiniteData } from "@tanstack/react-query";
-import type { Tracks } from "../../../models/track";
+import type { Tracks } from "../../../../models/track";
 import PlaylistItem from "./PlaylistItem";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
