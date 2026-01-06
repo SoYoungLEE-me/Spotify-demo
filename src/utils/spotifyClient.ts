@@ -2,10 +2,13 @@ import axios from "axios";
 import { SPOTIFY_BASE_URL } from "../configs/commonConfig";
 import { handleAxiosError } from "./handleAxiosError";
 
-export const spotifyGet = async <T>(
+export const spotifyGet = async <
+  T,
+  P = Record<string, string | number | undefined>
+>(
   endpoint: string,
   token: string,
-  params?: Record<string, string | number | undefined>
+  params?: P
 ): Promise<T> => {
   try {
     const response = await axios.get(`${SPOTIFY_BASE_URL}${endpoint}`, {

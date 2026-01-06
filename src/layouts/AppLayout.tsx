@@ -160,8 +160,13 @@ const AppLayout = () => {
             minHeight: 0,
             display: "flex",
             flexDirection: "column",
-            overflow: "hidden",
+            overflowY: "auto",
             position: "relative",
+
+            scrollbarWidth: "none", // Firefox
+            "&::-webkit-scrollbar": {
+              display: "none", // Chrome, Safari
+            },
           }}
         >
           <Outlet key={location.pathname} />
