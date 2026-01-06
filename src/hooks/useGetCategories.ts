@@ -3,7 +3,7 @@ import { getCategories } from "../apis/spotify/categoryApi";
 import type { GetCategoriesRequest } from "../models/category";
 import useClientCredentialToken from "./useClientCredentialToken";
 
-const DEFAULT_LIMIT = 20;
+const DEFAULT_LIMIT = 12;
 
 const useGetCategories = (params?: GetCategoriesRequest) => {
   const clientCredentialToken = useClientCredentialToken();
@@ -13,7 +13,8 @@ const useGetCategories = (params?: GetCategoriesRequest) => {
     enabled: !!clientCredentialToken,
 
     initialPageParam: 0,
-
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
     queryFn: ({ pageParam }) => {
       return getCategories(clientCredentialToken!, {
         ...params,

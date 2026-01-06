@@ -155,6 +155,7 @@ const AppLayout = () => {
 
         <Box
           component="main"
+          id="scrollable-container"
           sx={{
             flex: 1,
             minHeight: 0,
