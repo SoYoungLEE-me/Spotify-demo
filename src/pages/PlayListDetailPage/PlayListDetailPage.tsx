@@ -9,8 +9,9 @@ import PlaylistItemsContainer from "./components/list/PlaylistItemsContainer";
 import AuthErrorFallback from "../../common/components/AuthErrorFallback";
 import EmptyPlaylist from "./components/empty/EmptyPlaylist";
 import AddTrackButton from "./components/actions/AddTrackButton";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import SearchOverlay from "./components/search/SearchOverlay";
+import useChangePlaylistsDetails from "../../hooks/useChangePlaylistDetails";
 
 const PlayListDetailPage = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -36,6 +37,20 @@ const PlayListDetailPage = () => {
     playlist_id: id!,
     limit: 15,
   });
+
+  const { mutate: changeDetails } = useChangePlaylistsDetails(id!);
+
+  const handleSubmitTitle = useCallback(
+    (title: string) => {
+      if (!playlist) return;
+
+      const nextTitle = title.trim();
+      if (!nextTitle || nextTitle === playlist.name) return;
+
+      changeDetails({ name: nextTitle });
+    },
+    [playlist, changeDetails]
+  );
 
   const isLoading = isPlaylistLoading || isPlaylistItemsLoading;
   const error = playlistError || playlistItemsError;
@@ -68,7 +83,7 @@ const PlayListDetailPage = () => {
     <Box display="flex" flexDirection="column" height="100vh" overflow="hidden">
       {isSearchOpen && <SearchOverlay onClose={() => setIsSearchOpen(false)} />}
 
-      <PlaylistHeader playlist={playlist} />
+      <PlaylistHeader playlist={playlist} onSubmitTitle={handleSubmitTitle} />
       <Box padding="10px 16px" display="flex" justifyContent="flex-end">
         <AddTrackButton onClick={() => setIsSearchOpen((prev) => !prev)} />
       </Box>

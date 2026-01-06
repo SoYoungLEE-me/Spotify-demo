@@ -57,7 +57,7 @@ export interface GetPlaylistItemRequest extends GetPlaylistRequest {
   limit?: number;
 }
 
-export interface CreatePlaylistRequest {
+export interface PlaylistDetailsPayload {
   name: string;
   public?: boolean;
   collaborative?: boolean;

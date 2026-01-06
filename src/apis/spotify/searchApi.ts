@@ -1,4 +1,4 @@
-import { spotifyGet } from "../../utils/clientTokenClient";
+import { spotifyGet } from "../../utils/spotifyClient";
 import type { SearchRequest, SearchResponse } from "../../models/search";
 
 export const getSearchForItem = async (

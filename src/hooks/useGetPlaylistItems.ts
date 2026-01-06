@@ -1,18 +1,17 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getPlaylistItems } from "../apis/spotify/playlistApi";
 import type { GetPlaylistItemRequest } from "../models/playlist";
-import useClientCredentialToken from "./useClientCredentialToken";
 
 const useGetPlaylistItems = (params: GetPlaylistItemRequest) => {
-  const clientCredentialToken = useClientCredentialToken();
+  const accessToken = localStorage.getItem("access_token");
 
   return useInfiniteQuery({
     queryKey: ["playlist-items", params.playlist_id, params.limit],
-    enabled: !!clientCredentialToken && !!params.playlist_id,
+    enabled: !!accessToken && !!params.playlist_id,
     queryFn: ({ pageParam = 0 }) =>
       getPlaylistItems({
         ...params,
-        token: clientCredentialToken!,
+        token: accessToken!,
         offset: pageParam,
       }),
 

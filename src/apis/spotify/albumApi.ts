@@ -1,5 +1,5 @@
 import type { GetNewReleasesResponse } from "../../models/album";
-import { spotifyGet } from "../../utils/clientTokenClient";
+import { spotifyGet } from "../../utils/spotifyClient";
 
 export const getNewReleases = async (
   token: string

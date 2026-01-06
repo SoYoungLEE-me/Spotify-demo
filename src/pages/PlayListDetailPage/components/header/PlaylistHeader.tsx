@@ -1,14 +1,44 @@
-import { Box, Typography } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import type { Playlist } from "../../../../models/playlist";
 import AudiotrackIcon from "@mui/icons-material/Audiotrack";
-
+import { useState, useEffect } from "react";
 interface PlaylistHeaderProps {
   playlist: Playlist;
+  onSubmitTitle: (title: string) => void;
 }
 
-const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
+const PlaylistHeader = ({ playlist, onSubmitTitle }: PlaylistHeaderProps) => {
+  const safeName = playlist.name ?? "";
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [title, setTitle] = useState(safeName);
+
   const imageUrl = playlist.images?.[0]?.url;
 
+  useEffect(() => {
+    if (!isEditing) {
+      setTitle(safeName);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [safeName]);
+
+  const handleSubmit = () => {
+    const trimmedTitle = title.trim();
+
+    if (trimmedTitle === "" || trimmedTitle === safeName) {
+      setIsEditing(false);
+      setTitle(safeName);
+      return;
+    }
+
+    onSubmitTitle(trimmedTitle);
+    setIsEditing(false);
+  };
+
+  const handleCancel = () => {
+    setTitle(safeName);
+    setIsEditing(false);
+  };
   return (
     <Box
       position="relative"
@@ -111,18 +141,42 @@ const PlaylistHeader = ({ playlist }: PlaylistHeaderProps) => {
             {playlist.type}
           </Typography>
 
-          <Typography
-            fontWeight={900}
-            lineHeight={1}
-            sx={{
-              fontSize: { xs: "28px", sm: "40px", md: "56px" },
-              textShadow: "0 4px 12px rgba(0,0,0,0.5)",
-              mb: { xs: 1, md: 1.5 },
-              wordBreak: "keep-all",
-            }}
-          >
-            {playlist.name}
-          </Typography>
+          {isEditing ? (
+            <TextField
+              value={title}
+              autoFocus
+              variant="standard"
+              onChange={(e) => setTitle(e.target.value)}
+              onBlur={handleCancel}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleSubmit();
+                if (e.key === "Escape") handleCancel();
+              }}
+              InputProps={{
+                sx: {
+                  fontSize: { xs: "28px", sm: "40px", md: "56px" },
+                  fontWeight: 900,
+                  color: "white",
+                },
+              }}
+            />
+          ) : (
+            <Typography
+              fontWeight={900}
+              lineHeight={1}
+              sx={{
+                fontSize: { xs: "28px", sm: "40px", md: "56px" },
+                textShadow: "0 4px 12px rgba(0,0,0,0.5)",
+                mb: { xs: 1, md: 1.5 },
+                wordBreak: "keep-all",
+                cursor: "pointer",
+                "&:hover": { opacity: 0.85 },
+              }}
+              onClick={() => setIsEditing(true)}
+            >
+              {playlist.name}
+            </Typography>
+          )}
 
           {playlist.description && (
             <Typography

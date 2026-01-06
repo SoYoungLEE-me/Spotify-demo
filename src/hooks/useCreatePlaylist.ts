@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createPlaylist } from "../apis/spotify/playlistApi";
 import useGetCurrentUserProfile from "./useGetCurrentUserProfile";
-import type { CreatePlaylistRequest } from "../models/playlist";
+import type { PlaylistDetailsPayload } from "../models/playlist";
 
 const useCreatePlaylist = () => {
   const access_token = localStorage.getItem("access_token");
@@ -9,7 +9,7 @@ const useCreatePlaylist = () => {
   const queryClient = useQueryClient();
   const { data: user } = useGetCurrentUserProfile();
   return useMutation({
-    mutationFn: (params: CreatePlaylistRequest) => {
+    mutationFn: (params: PlaylistDetailsPayload) => {
       if (!user || !user.id || !access_token) {
         return Promise.reject(new Error("user or accessToken is not defined"));
       }

@@ -1,10 +1,10 @@
-import { spotifyGet, spotifyPost } from "../../utils/clientTokenClient";
+import { spotifyGet, spotifyPost, spotifyPut } from "../../utils/spotifyClient";
 import type {
   GetCurrentUserPlaylistsRequest,
   Playlists,
   Playlist,
   GetPlaylistItemRequest,
-  CreatePlaylistRequest,
+  PlaylistDetailsPayload,
   AddItemsToPlaylistRequest,
   AddItemsToPlaylistResponse,
 } from "../../models/playlist";
@@ -52,7 +52,7 @@ export const getPlaylistItems = async (
 export const createPlaylist = async (
   token: string,
   userId: string,
-  params: CreatePlaylistRequest
+  params: PlaylistDetailsPayload
 ): Promise<Playlist> => {
   return spotifyPost<Playlist>(`/users/${userId}/playlists`, token, params);
 };
@@ -67,4 +67,12 @@ export const addItemsToPlaylist = async (
     token,
     body
   );
+};
+
+export const changePlaylistDetails = async (
+  token: string,
+  playlistId: string,
+  body: PlaylistDetailsPayload
+): Promise<void> => {
+  return spotifyPut<void>(`/playlists/${playlistId}`, token, body);
 };
