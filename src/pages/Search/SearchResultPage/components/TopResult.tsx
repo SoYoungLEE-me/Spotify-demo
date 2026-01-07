@@ -49,7 +49,8 @@ const TopResult = ({ track, artist }: Props) => {
           cursor: "pointer",
           transition: "all 0.3s ease",
           "&:hover": {
-            backgroundColor: "#282828",
+            color: "primary.main",
+            backgroundColor: "rgba(255,255,255,0.08)",
             "& .play-button": {
               opacity: 1,
               transform: "translateY(0)",
