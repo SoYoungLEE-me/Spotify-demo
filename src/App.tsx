@@ -8,9 +8,7 @@ const HomePage = React.lazy(() => import("./pages/HomePage/HomePage"));
 const SearchPage = React.lazy(
   () => import("./pages/Search/SearchPage/SearchPage")
 );
-const SearchResultPage = React.lazy(
-  () => import("./pages/Search/SearchResultPage/SearchResultPage")
-);
+
 const PlayListDetailPage = React.lazy(
   () => import("./pages/PlayListDetailPage/PlayListDetailPage")
 );
@@ -70,7 +68,6 @@ function App() {
             <Route path="/callback" element={<HomePage />} />
             <Route path="/search" element={<SearchLayout />}>
               <Route index element={<SearchPage />} />
-              <Route path=":keyword" element={<SearchResultPage />} />
             </Route>
             <Route path="/playlist/:id" element={<PlayListDetailPage />} />
             <Route path="/playlist" element={<PlayListPage />} />
