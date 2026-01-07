@@ -11,7 +11,7 @@ const AlbumsSection = ({ albums }: Props) => {
   if (albums.length === 0) return null;
 
   return (
-    <Box px={3} mb={6}>
+    <Box px={3} mb={6} marginTop="20px">
       <Typography
         variant="h5"
         sx={{ fontWeight: 800, mb: 2, letterSpacing: "-0.02em" }}

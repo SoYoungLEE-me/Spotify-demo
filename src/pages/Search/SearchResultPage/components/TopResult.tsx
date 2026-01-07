@@ -1,5 +1,4 @@
 import { Box, Typography, Chip } from "@mui/material";
-
 import type { TrackObject } from "../../../../models/track";
 import type { Artist } from "../../../../models/artist";
 import ArtistAvatar from "../../../../common/Artist/ArtistAvatar";
@@ -13,22 +12,14 @@ type Props = {
 const TopResult = ({ track, artist }: Props) => {
   if (!track && !artist) return null;
 
-  let imageUrl: string | undefined;
-  let title: string;
-  let typeLabel: string;
-  let secondaryText: string;
+  const imageUrl = track
+    ? track.album?.images?.[0]?.url
+    : artist?.images?.[0]?.url;
 
-  if (track) {
-    imageUrl = track.album?.images?.[0]?.url;
-    title = track.name ?? "Unknown Title";
-    typeLabel = "Song";
-    secondaryText = track.artists?.[0]?.name ?? "Unknown Artist";
-  } else {
-    imageUrl = artist?.images?.[0]?.url;
-    title = artist?.name ?? "Unknown Artist";
-    typeLabel = "Artist";
-    secondaryText = "Artist";
-  }
+  const title = track?.name ?? artist?.name ?? "Unknown";
+  const subtitle = track
+    ? track.artists?.[0]?.name ?? "Unknown Artist"
+    : "Artist";
 
   return (
     <Box px={3} mb={5}>
@@ -42,15 +33,16 @@ const TopResult = ({ track, artist }: Props) => {
       <Box
         sx={{
           position: "relative",
-          backgroundColor: "#181818",
           borderRadius: "12px",
           padding: "24px",
           maxWidth: 360,
           cursor: "pointer",
+          background:
+            "linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))",
           transition: "all 0.3s ease",
           "&:hover": {
-            color: "primary.main",
-            backgroundColor: "rgba(255,255,255,0.08)",
+            background:
+              "linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04))",
             "& .play-button": {
               opacity: 1,
               transform: "translateY(0)",
@@ -58,57 +50,76 @@ const TopResult = ({ track, artist }: Props) => {
           },
         }}
       >
-        <Box mb={3} sx={{ position: "relative" }}>
+        <Chip
+          label="Top result"
+          size="small"
+          sx={{
+            position: "absolute",
+            top: 16,
+            right: 16,
+            backgroundColor: "rgba(244,63,94,0.25)",
+            color: "#FFD1D1",
+
+            fontSize: "0.65rem",
+            fontWeight: 700,
+          }}
+        />
+
+        <Box mb={3} sx={{ width: "fit-content" }}>
           {imageUrl ? (
             <Box
               component="img"
               src={imageUrl}
               alt={title}
               sx={{
-                width: 100,
-                height: 100,
+                width: 120,
+                height: 120,
                 objectFit: "cover",
                 borderRadius: track ? "8px" : "50%",
-                boxShadow: "0 8px 24px rgba(0,0,0,0.5)",
+                boxShadow: "0 12px 32px rgba(0,0,0,0.6)",
               }}
             />
           ) : (
-            <ArtistAvatar size={100} />
+            <ArtistAvatar size={120} />
           )}
         </Box>
 
         <Typography
+          variant="subtitle2"
+          sx={{
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+            fontWeight: 700,
+            color: "text.secondary",
+            mb: 0.5,
+          }}
+        >
+          {track ? "Song" : "Artist"}
+        </Typography>
+
+        <Typography
           variant="h4"
           sx={{
-            fontWeight: 800,
-            fontSize: "2rem",
+            fontWeight: 900,
+            letterSpacing: "-0.03em",
+            lineHeight: 1.1,
             mb: 1,
             overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
           }}
         >
           {title}
         </Typography>
 
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          <Chip
-            label={typeLabel}
-            size="small"
-            sx={{
-              backgroundColor: "#000",
-              color: "#fff",
-              fontWeight: 700,
-              fontSize: "0.7rem",
-            }}
-          />
-          <Typography
-            variant="body2"
-            sx={{ color: "rgba(255,255,255,0.7)", fontWeight: 500 }}
-          >
-            {secondaryText}
-          </Typography>
-        </Box>
+        <Typography
+          variant="body2"
+          sx={{ color: "rgba(255,255,255,0.7)", fontWeight: 500 }}
+        >
+          {subtitle}
+        </Typography>
+
         <Box
           className="play-button"
           sx={{

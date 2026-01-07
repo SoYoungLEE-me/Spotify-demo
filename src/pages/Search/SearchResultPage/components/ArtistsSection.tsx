@@ -11,7 +11,7 @@ const ArtistsSection = ({ artists }: Props) => {
   if (artists.length === 0) return null;
 
   return (
-    <Box px={3} mb={5}>
+    <Box px={3} mb={5} marginTop="20px">
       <Typography
         variant="h5"
         sx={{ fontWeight: 800, mb: 2, letterSpacing: "-0.02em" }}
