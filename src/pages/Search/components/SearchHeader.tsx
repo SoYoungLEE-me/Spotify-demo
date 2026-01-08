@@ -62,7 +62,6 @@ const SearchHeader = ({ defaultValue, onSearch }: Props) => {
             sx={{ cursor: "pointer" }}
             onClick={() => {
               setValue("");
-              onSearch("");
             }}
           />
         )}

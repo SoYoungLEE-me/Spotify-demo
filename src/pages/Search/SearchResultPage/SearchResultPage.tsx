@@ -38,12 +38,10 @@ const SearchResultPage = () => {
   return (
     <div>
       <Grid container spacing={3} px={3}>
-        {/* Top Result */}
         <Grid size={{ xs: 12, md: 4 }}>
           <TopResult track={tracks[0]} artist={artists[0]} />
         </Grid>
 
-        {/* Songs */}
         <Grid size={{ xs: 12, md: 8 }}>
           <SongsSection tracks={tracks} />
         </Grid>
