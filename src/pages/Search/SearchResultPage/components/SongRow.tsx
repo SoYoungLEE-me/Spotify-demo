@@ -5,13 +5,21 @@ import PlaylistSelectMenu from "../../../../common/components/PlaylistSelectMenu
 import useGetCurrentUserPlaylists from "../../../../hooks/useGetCurrentUserPlaylists";
 import AppSnackbar from "../../../../common/components/AppSnackbar";
 import { useState } from "react";
-
+import useAddItemsToPlaylist from "../../../../hooks/useAddItemsToPlaylist";
 type Props = {
   track: TrackObject;
 };
 
 const SongRow = ({ track }: Props) => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState<
+    "success" | "error" | "info"
+  >("success");
+
+  const [selectedPlaylistId, setSelectedPlaylistId] = useState<string | null>(
+    null
+  );
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
@@ -22,18 +30,44 @@ const SongRow = ({ track }: Props) => {
 
   const imageUrl = track.album?.images?.[0]?.url;
   const artistName = track.artists?.[0]?.name ?? "Unknown Artist";
+  const accessToken = localStorage.getItem("access_token");
+  const isLoggedIn = Boolean(accessToken);
 
   const handleAddClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
 
-    const accessToken = localStorage.getItem("access_token");
-
     if (!accessToken) {
+      setSnackbarMessage("Please log in to add songs to a playlist.");
+      setSnackbarSeverity("info");
       setSnackbarOpen(true);
       return;
     }
 
     setAnchorEl(e.currentTarget);
+  };
+
+  const { mutate: addItems } = useAddItemsToPlaylist(selectedPlaylistId!);
+  const handleAddItems = (playlistId: string) => {
+    if (!track.uri) return;
+
+    setSelectedPlaylistId(playlistId);
+
+    addItems(
+      { uris: [track.uri] },
+      {
+        onSuccess: () => {
+          setSnackbarMessage("Added to playlist.");
+          setSnackbarSeverity("success");
+          setSnackbarOpen(true);
+          setAnchorEl(null);
+        },
+        onError: () => {
+          setSnackbarMessage("Failed to add song.");
+          setSnackbarSeverity("error");
+          setSnackbarOpen(true);
+        },
+      }
+    );
   };
 
   return (
@@ -108,22 +142,24 @@ const SongRow = ({ track }: Props) => {
           <AddIcon />
         </IconButton>
       </Box>
-      <PlaylistSelectMenu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={() => setAnchorEl(null)}
-        playlists={playlists}
-        hasNextPage={hasNextPage}
-        isFetchingNextPage={isFetchingNextPage}
-        fetchNextPage={fetchNextPage}
-        onSelect={(playlistId) => {
-          console.log("selected:", playlistId);
-        }}
-      />
+      {isLoggedIn && (
+        <PlaylistSelectMenu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={() => setAnchorEl(null)}
+          playlists={playlists}
+          hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          fetchNextPage={fetchNextPage}
+          onSelect={(playlistId) => {
+            handleAddItems(playlistId);
+          }}
+        />
+      )}
       <AppSnackbar
         open={snackbarOpen}
-        message="Please log in to add songs to a playlist."
-        severity="info"
+        message={snackbarMessage}
+        severity={snackbarSeverity}
         onClose={() => setSnackbarOpen(false)}
       />
     </>
