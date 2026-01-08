@@ -1,10 +1,9 @@
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import EmptyPlayList from "./EmptyPlayList";
 import LibraryPlaylist from "./LibraryPlaylist";
 import useGetCurrentUserPlaylists from "../../hooks/useGetCurrentUserPlaylists";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
-import { ScaleLoader } from "react-spinners";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -65,10 +64,11 @@ const Library = () => {
         />
       ))}
 
-      {/* Infinite scroll sentinel */}
-      <Box ref={ref} display="flex" justifyContent="center" py={1}>
-        {isFetchingNextPage && <ScaleLoader color="#F43F5E" height={18} />}
-      </Box>
+      {hasNextPage && (
+        <Box ref={ref} display="flex" justifyContent="center" py={2}>
+          <CircularProgress size={20} sx={{ color: "primary.main" }} />
+        </Box>
+      )}
     </Box>
   );
 };

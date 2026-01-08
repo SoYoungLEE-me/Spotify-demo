@@ -3,8 +3,7 @@ import type { Tracks } from "../../../../models/track";
 import PlaylistItem from "./PlaylistItem";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
-import { Box } from "@mui/material";
-import { ScaleLoader } from "react-spinners";
+import { Box, CircularProgress } from "@mui/material";
 
 interface Props {
   playlistItems: InfiniteData<Tracks>;
@@ -42,9 +41,9 @@ const PlaylistItemsContainer = ({
         />
       ))}
 
-      {isFetchingNextPage && (
-        <Box display="flex" justifyContent="center" py={2}>
-          <ScaleLoader color="#F43F5E" height={18} />
+      {hasNextPage && (
+        <Box ref={ref} display="flex" justifyContent="center" py={2}>
+          <CircularProgress size={20} sx={{ color: "primary.main" }} />
         </Box>
       )}
 
