@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import CardGrid from "../../../common/MusicCard/CardGrid";
 import Card from "../../../common/MusicCard/Card";
 import ErrorMessage from "../../../common/components/ErrorMessage";
@@ -24,7 +24,7 @@ const TrendingAlbums = ({ title, albums, error }: Props) => {
   }
 
   return (
-    <div style={{ marginBottom: "20px" }}>
+    <Box px={3} mb={6} marginTop="20px">
       <Typography variant="h2" paddingTop="10px" marginBottom="20px">
         {title}
       </Typography>
@@ -39,7 +39,7 @@ const TrendingAlbums = ({ title, albums, error }: Props) => {
           />
         ))}
       </CardGrid>
-    </div>
+    </Box>
   );
 };
 

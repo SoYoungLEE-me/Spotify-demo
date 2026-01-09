@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import CardGrid from "../../../common/MusicCard/CardGrid";
 import Card from "../../../common/MusicCard/Card";
 import type { GetNewReleasesResponse } from "../../../models/album";
@@ -25,7 +25,7 @@ const NewReleases = ({ data, error }: Props) => {
   }
 
   return (
-    <div style={{ marginBottom: "20px" }}>
+    <Box px={3} mb={6}>
       <Typography variant="h2" paddingTop="10px" marginBottom="20px">
         New Released Albums
       </Typography>
@@ -44,7 +44,7 @@ const NewReleases = ({ data, error }: Props) => {
       ) : (
         <Typography>No albums found</Typography>
       )}
-    </div>
+    </Box>
   );
 };
 

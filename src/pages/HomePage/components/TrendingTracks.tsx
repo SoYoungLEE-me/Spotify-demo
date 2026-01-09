@@ -54,7 +54,7 @@ const TrendingTracks = ({
   const rightTracks = visibleTracks.slice(5, 10);
 
   return (
-    <Box mb={8}>
+    <Box mb={6} px={3}>
       <Typography variant="h2" mb={3.5}>
         Trending Tracks
       </Typography>
