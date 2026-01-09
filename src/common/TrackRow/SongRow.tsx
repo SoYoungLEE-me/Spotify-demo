@@ -1,11 +1,12 @@
 import { Box, Typography, IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import type { TrackObject } from "../../../../models/track";
-import PlaylistSelectMenu from "../../../../common/components/PlaylistSelectMenu";
-import useGetCurrentUserPlaylists from "../../../../hooks/useGetCurrentUserPlaylists";
-import AppSnackbar from "../../../../common/components/AppSnackbar";
+import type { TrackObject } from "../../models/track";
+import PlaylistSelectMenu from "../components/PlaylistSelectMenu";
+import useGetCurrentUserPlaylists from "../../hooks/useGetCurrentUserPlaylists";
+import AppSnackbar from "../components/AppSnackbar";
 import { useState } from "react";
-import useAddItemsToPlaylist from "../../../../hooks/useAddItemsToPlaylist";
+import useAddItemsToPlaylist from "../../hooks/useAddItemsToPlaylist";
+
 type Props = {
   track: TrackObject;
 };

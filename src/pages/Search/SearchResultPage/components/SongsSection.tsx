@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import type { TrackObject } from "../../../../models/track";
-import SongRow from "./SongRow";
+import SongRow from "../../../../common/TrackRow/SongRow";
 
 type Props = {
   tracks: TrackObject[];

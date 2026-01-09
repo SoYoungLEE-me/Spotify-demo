@@ -59,7 +59,6 @@ const TopResult = ({ track, artist }: Props) => {
             right: 16,
             backgroundColor: "rgba(244,63,94,0.25)",
             color: "#FFD1D1",
-
             fontSize: "0.65rem",
             fontWeight: 700,
           }}
