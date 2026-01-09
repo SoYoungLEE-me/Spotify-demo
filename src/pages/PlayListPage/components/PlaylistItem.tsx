@@ -22,6 +22,7 @@ const PlaylistItem = ({ playlist, isActive, onClick }: PlaylistItemProps) => {
         transition: "all 0.2s",
         ...(isActive && { backgroundColor: "action.selected" }),
         "&:active": { transform: "scale(0.95)" },
+        px: 1.5,
       })}
     >
       <Box
