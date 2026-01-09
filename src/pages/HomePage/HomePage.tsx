@@ -42,10 +42,10 @@ const HomePage = () => {
     error: KPopError,
     isLoading: isKPopLoading,
   } = useSearchItems({
-    q: dynamicYearQuery,
+    q: `${dynamicYearQuery}`,
     type: [SEARCH_TYPE.Album],
     market: "KR",
-    limit: 10,
+    limit: 20,
   });
 
   const {
@@ -107,12 +107,12 @@ const HomePage = () => {
       <TopArtists artists={Top_Artists} error={TopArtistsError} />
       <NewReleases data={newAlbum} error={newAlbumError} />
       <TrendingAlbums
-        title="Global Trending Albums"
+        title="Now Trending · US"
         albums={GlobalPopAlbums}
         error={GlobalPopError}
       />
       <TrendingAlbums
-        title="Korean Trending Albums"
+        title="Now Trending · Korea"
         albums={KPopTrendingAlbums}
         error={KPopError}
       />

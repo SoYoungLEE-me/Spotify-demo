@@ -24,7 +24,7 @@ const TopArtists = ({ artists, error }: Props) => {
 
   return (
     <div>
-      <Box px={3} mb={6} marginTop="20px">
+      <Box px={3} mb={6}>
         <Typography
           variant="h5"
           sx={{ fontWeight: 800, mb: 2, letterSpacing: "-0.02em" }}

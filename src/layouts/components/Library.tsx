@@ -1,5 +1,4 @@
 import { Box, CircularProgress } from "@mui/material";
-import EmptyPlayList from "./EmptyPlayList";
 import LibraryPlaylist from "./LibraryPlaylist";
 import useGetCurrentUserPlaylists from "../../hooks/useGetCurrentUserPlaylists";
 import { useInView } from "react-intersection-observer";
@@ -7,7 +6,11 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-const Library = () => {
+interface LibraryProps {
+  renderEmpty: () => React.ReactNode;
+}
+
+const Library = ({ renderEmpty }: LibraryProps) => {
   const navigate = useNavigate();
   const [activeId, setActiveId] = useState<string | null>(null);
 
@@ -28,7 +31,7 @@ const Library = () => {
   const playlists = data?.pages.flatMap((page) => page.items) ?? [];
 
   if (!data || playlists.length === 0) {
-    return <EmptyPlayList />;
+    return renderEmpty();
   }
 
   const handleClick = (id: string) => {

@@ -3,9 +3,9 @@ import { styled, Box, Typography } from "@mui/material";
 import { NavLink } from "react-router";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
-import LibraryHead from "./components/LibraryHead";
-import Library from "./components/Library";
+import LibraryContainer from "./components/LibraryContainer";
 import Navbar from "./components/Navbar";
+import MobileNav from "./components/MobileNav";
 
 const Layout = styled("div")({
   display: "flex",
@@ -104,7 +104,12 @@ const AppLayout = () => {
   const location = useLocation();
 
   return (
-    <Layout>
+    <Layout
+      sx={{
+        pb: { xs: "75px", sm: "10px" },
+        p: { xs: "5px", sm: "10px" },
+      }}
+    >
       <Sidebar>
         <ContentBox>
           <NavList>
@@ -145,8 +150,7 @@ const AppLayout = () => {
             minHeight: 0,
           }}
         >
-          <LibraryHead />
-          <Library />
+          <LibraryContainer />
         </ContentBox>
       </Sidebar>
 
@@ -173,6 +177,7 @@ const AppLayout = () => {
           <Outlet key={location.pathname} />
         </Box>
       </MainContainer>
+      <MobileNav />
     </Layout>
   );
 };

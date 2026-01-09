@@ -28,9 +28,9 @@ const TrendingTracks = ({
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const markets = [
-    { code: "US", label: "Global" },
-    { code: "KR", label: "Korea" },
-    { code: "JP", label: "Japan" },
+    { code: "US", label: "US" },
+    { code: "KR", label: "KR" },
+    { code: "JP", label: "JP" },
     { code: "GB", label: "UK" },
   ];
 

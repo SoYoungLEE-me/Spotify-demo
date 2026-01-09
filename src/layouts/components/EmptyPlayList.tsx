@@ -17,7 +17,11 @@ const AddButton = styled(Button)({
   },
 });
 
-const EmptyPlayList = () => {
+interface EmptyPlayListProps {
+  onCreatePlaylist: () => void;
+}
+
+const EmptyPlayList = ({ onCreatePlaylist }: EmptyPlayListProps) => {
   return (
     <EmptyContainer>
       <Typography
@@ -32,7 +36,9 @@ const EmptyPlayList = () => {
       <Typography variant="body2" color="text.secondary" mb={2}>
         It's easy, we'll help you
       </Typography>
-      <AddButton variant="contained">Create Playlist</AddButton>
+      <AddButton variant="contained" onClick={onCreatePlaylist}>
+        Create Playlist
+      </AddButton>
     </EmptyContainer>
   );
 };
