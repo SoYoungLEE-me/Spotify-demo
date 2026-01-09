@@ -25,7 +25,7 @@ const NewReleases = ({ data, error }: Props) => {
   }
 
   return (
-    <div>
+    <div style={{ marginBottom: "20px" }}>
       <Typography variant="h2" paddingTop="10px" marginBottom="20px">
         New Released Albums
       </Typography>

@@ -96,8 +96,8 @@ const SongRow = ({ track }: Props) => {
       >
         <Box
           sx={{
-            width: 40,
-            height: 40,
+            width: 50,
+            height: 50,
             flexShrink: 0,
             borderRadius: "4px",
             overflow: "hidden",

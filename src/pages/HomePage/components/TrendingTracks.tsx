@@ -1,4 +1,11 @@
-import { Typography, Grid, Box, useMediaQuery } from "@mui/material";
+import {
+  Typography,
+  Grid,
+  Box,
+  useMediaQuery,
+  Button,
+  Stack,
+} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import ErrorMessage from "../../../common/components/ErrorMessage";
 import type { TrackObject } from "../../../models/track";
@@ -7,11 +14,25 @@ import SongRow from "../../../common/TrackRow/SongRow";
 type Props = {
   tracks: TrackObject[];
   error?: Error | null;
+  currentMarket: string;
+  onMarketChange: (market: string) => void;
 };
 
-const TrendingTracks = ({ tracks, error }: Props) => {
+const TrendingTracks = ({
+  tracks,
+  error,
+  currentMarket,
+  onMarketChange,
+}: Props) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const markets = [
+    { code: "US", label: "Global" },
+    { code: "KR", label: "Korea" },
+    { code: "JP", label: "Japan" },
+    { code: "GB", label: "UK" },
+  ];
 
   if (error) {
     return <ErrorMessage errorMessage="Failed to load trending tracks." />;
@@ -33,10 +54,35 @@ const TrendingTracks = ({ tracks, error }: Props) => {
   const rightTracks = visibleTracks.slice(5, 10);
 
   return (
-    <Box mb={6}>
-      <Typography variant="h2" mb={3}>
+    <Box mb={8}>
+      <Typography variant="h2" mb={3.5}>
         Trending Tracks
       </Typography>
+
+      <Stack direction="row" spacing={1} mb={3}>
+        {markets.map((m) => (
+          <Button
+            key={m.code}
+            variant={currentMarket === m.code ? "contained" : "outlined"}
+            onClick={() => onMarketChange(m.code)}
+            size="small"
+            sx={{
+              borderRadius: "20px",
+              color: currentMarket === m.code ? "black" : "white",
+              backgroundColor:
+                currentMarket === m.code ? "white" : "transparent",
+              borderColor: "rgba(255,255,255,0.5)",
+              "&:hover": {
+                borderColor: "white",
+                backgroundColor:
+                  currentMarket === m.code ? "white" : "rgba(255,255,255,0.1)",
+              },
+            }}
+          >
+            {m.label}
+          </Button>
+        ))}
+      </Stack>
 
       <Grid container spacing={2}>
         {/* Left column */}
