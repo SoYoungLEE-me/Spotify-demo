@@ -172,6 +172,7 @@ const AppLayout = () => {
             "&::-webkit-scrollbar": {
               display: "none", // Chrome, Safari
             },
+            pb: { xs: "50px", sm: 0 },
           }}
         >
           <Outlet key={location.pathname} />

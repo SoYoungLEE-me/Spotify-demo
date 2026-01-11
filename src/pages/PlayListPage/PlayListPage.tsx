@@ -68,12 +68,7 @@ const PlayListPage = () => {
   };
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      height="100%"
-      marginBottom="50px"
-    >
+    <Box display="flex" flexDirection="column" height="100%">
       <Box
         display="flex"
         justifyContent="space-between"
